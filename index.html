@@ -9,20 +9,24 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:        #F8F4EF;
-      --bg-alt:    #F2EDE4;
-      --bg-dark:   #1C1C1A;
-      --surface:   #FFFFFF;
-      --border:    rgba(0,0,0,.08);
-      --border-m:  rgba(0,0,0,.12);
-      --sage:      #5C7A52;
-      --sage-light:#8AA880;
-      --sage-pale: #EBF0E8;
-      --earth:     #A07850;
-      --text-1:    #1C1C1A;
-      --text-2:    #4A4845;
-      --text-3:    #7A7672;
-      --white:     #FFFFFF;
+      --bg:         #F4F7FB;
+      --bg-alt:     #EBF0F8;
+      --bg-dark:    #0F1F35;
+      --surface:    #FFFFFF;
+      --border:     rgba(0,0,0,.07);
+      --border-m:   rgba(0,0,0,.12);
+      /* Blue palette replacing all greens */
+      --blue:       #2D6BA4;
+      --blue-dark:  #1A4A78;
+      --blue-mid:   #4A85BE;
+      --blue-light: #7AAED6;
+      --blue-pale:  #E0EBF7;
+      --blue-deep:  #0D3260;
+      --earth:      #8A9BAF;
+      --text-1:     #0F1F35;
+      --text-2:     #3A4A5C;
+      --text-3:     #6A7A8C;
+      --white:      #FFFFFF;
       --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px;
       --ease: cubic-bezier(.4,0,.2,1);
     }
@@ -36,18 +40,35 @@
     img { display: block; max-width: 100%; }
     a { text-decoration: none; color: inherit; }
 
+    /* ── TECHNIQUE LINKS (surbrillance) ── */
+    .tech-link {
+      color: var(--blue);
+      background: var(--blue-pale);
+      padding: .1em .4em;
+      border-radius: 4px;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(45,107,164,.3);
+      transition: background .2s, color .2s;
+      cursor: pointer;
+    }
+    .tech-link:hover {
+      background: var(--blue);
+      color: var(--white);
+      border-color: transparent;
+    }
+
     /* ── NAV ── */
     #nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 900;
       height: 64px; display: flex; align-items: center;
       padding: 0 max(24px, 4vw);
-      background: rgba(248,244,239,.88);
+      background: rgba(244,247,251,.92);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid transparent;
       transition: border-color .3s, background .3s;
     }
-    #nav.scrolled { border-color: var(--border); background: rgba(248,244,239,.96); }
+    #nav.scrolled { border-color: var(--border); background: rgba(244,247,251,.97); }
     .nav-inner {
       width: 100%; max-width: 1200px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between; gap: 2rem;
@@ -63,20 +84,20 @@
     }
     .nav-links a::after {
       content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
-      height: 1px; background: var(--sage);
+      height: 1px; background: var(--blue);
       transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease);
     }
     .nav-links a:hover { color: var(--text-1); }
     .nav-links a:hover::after { transform: scaleX(1); }
     .nav-cta {
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--text-1); color: var(--white);
+      background: var(--blue-dark); color: var(--white);
       padding: .55rem 1.25rem; border-radius: 50px;
       font-size: .8rem; font-weight: 500; white-space: nowrap;
       transition: background .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+      box-shadow: 0 2px 8px rgba(26,74,120,.25);
     }
-    .nav-cta:hover { background: var(--sage); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(92,122,82,.35); }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(45,107,164,.4); }
     .nav-ham {
       display: none; flex-direction: column; justify-content: center;
       gap: 5px; width: 32px; height: 32px;
@@ -99,7 +120,7 @@
     .mob-menu a { font-size: 1.1rem; font-weight: 400; color: var(--text-1); padding: 1rem 0; border-bottom: 1px solid var(--border); }
     .mob-cta {
       margin-top: 1.5rem; display: inline-flex;
-      background: var(--text-1); color: var(--white) !important;
+      background: var(--blue-dark); color: var(--white) !important;
       padding: .9rem 2rem; border-radius: 50px;
       font-size: .9rem; font-weight: 500; border: none !important; width: fit-content;
     }
@@ -115,17 +136,17 @@
     }
     .hero-copy::after {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 70% at 5% 60%, rgba(92,122,82,.07) 0%, transparent 65%);
+      background: radial-gradient(ellipse 60% 70% at 5% 60%, rgba(45,107,164,.07) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero-tag {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--sage-pale); color: var(--sage);
+      background: var(--blue-pale); color: var(--blue);
       font-size: .72rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
       padding: .4rem .9rem; border-radius: 50px; margin-bottom: 2rem; width: fit-content;
     }
     .hero-tag::before {
-      content: ''; width: 6px; height: 6px; background: var(--sage); border-radius: 50%;
+      content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%;
       flex-shrink: 0; animation: pulse 2.5s ease-in-out infinite;
     }
     @keyframes pulse { 0%,100%{ transform:scale(1);opacity:1; } 50%{ transform:scale(1.4);opacity:.6; } }
@@ -135,18 +156,18 @@
       font-weight: 400; line-height: 1.1; color: var(--text-1);
       letter-spacing: -.02em; margin-bottom: 1.5rem;
     }
-    .hero-h1 em { font-style: italic; color: var(--sage); }
+    .hero-h1 em { font-style: italic; color: var(--blue); }
     .hero-p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--text-2); max-width: 420px; margin-bottom: 2.5rem; }
     .hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
     .btn-dark {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--text-1); color: var(--white);
+      background: var(--blue-dark); color: var(--white);
       padding: .85rem 1.8rem; border-radius: 50px;
       font-size: .85rem; font-weight: 500;
-      box-shadow: 0 4px 20px rgba(0,0,0,.18);
+      box-shadow: 0 4px 20px rgba(26,74,120,.25);
       transition: background .2s, transform .2s, box-shadow .2s;
     }
-    .btn-dark:hover { background: var(--sage); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(92,122,82,.35); }
+    .btn-dark:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(45,107,164,.4); }
     .btn-dark svg { width: 14px; height: 14px; }
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
@@ -176,7 +197,7 @@
     .section-header.center .section-sub { margin: 0 auto; }
     .label {
       display: inline-block; font-size: .7rem; font-weight: 500;
-      letter-spacing: .14em; text-transform: uppercase; color: var(--sage); margin-bottom: .9rem;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: .9rem;
     }
     .h2 {
       font-family: 'Playfair Display', serif;
@@ -189,7 +210,7 @@
     #soins { background: var(--bg-alt); }
     .soins-tabs {
       display: flex; gap: .5rem; margin-bottom: 2.5rem;
-      background: rgba(0,0,0,.04); padding: 4px;
+      background: rgba(45,107,164,.07); padding: 4px;
       border-radius: 50px; width: fit-content;
     }
     .stab {
@@ -197,87 +218,60 @@
       font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 400; color: var(--text-2);
       padding: .5rem 1.3rem; border-radius: 50px; transition: background .2s, color .2s, box-shadow .2s;
     }
-    .stab.on { background: var(--white); color: var(--text-1); font-weight: 500; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    .stab.on { background: var(--white); color: var(--text-1); font-weight: 500; box-shadow: 0 2px 8px rgba(45,107,164,.15); }
     .spanel { display: none; }
     .spanel.on { display: block; }
-    .soins-banner { width: 100%; height: 220px; border-radius: var(--r-lg); overflow: hidden; margin-bottom: 1.5rem; }
-    .soins-banner img { width: 100%; height: 100%; object-fit: cover; }
+    .soins-banner { width: 100%; height: 260px; border-radius: var(--r-lg); overflow: hidden; margin-bottom: 1.5rem; }
+    .soins-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
 
     /* Accordion */
     .acc-list { display: flex; flex-direction: column; gap: .75rem; }
-
     .acc-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-md);
-      overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
       transition: box-shadow .25s var(--ease);
     }
-    .acc-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,.07); }
-    .acc-item.open { box-shadow: 0 8px 32px rgba(0,0,0,.09); }
-
-    /* Toujours visible */
-    .acc-always {
-      padding: 1.4rem 1.5rem;
-    }
-    .acc-top {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      gap: 1rem; margin-bottom: .9rem;
-    }
+    .acc-item:hover { box-shadow: 0 4px 20px rgba(45,107,164,.08); }
+    .acc-item.open { box-shadow: 0 8px 32px rgba(45,107,164,.12); border-color: rgba(45,107,164,.2); }
+    .acc-always { padding: 1.4rem 1.5rem; }
+    .acc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: .9rem; }
     .acc-title {
       font-family: 'Playfair Display', serif;
       font-size: 1.15rem; font-weight: 400; color: var(--text-1); line-height: 1.3;
     }
     .acc-price-badge {
       flex-shrink: 0; font-size: .78rem; font-weight: 500;
-      color: var(--sage); background: var(--sage-pale);
+      color: var(--blue); background: var(--blue-pale);
       padding: .25rem .75rem; border-radius: 50px; white-space: nowrap;
     }
-    .acc-intro {
-      font-size: .9rem; font-weight: 300; line-height: 1.8; color: var(--text-2);
-    }
-
-    /* Bouton toggle */
+    .acc-intro { font-size: .9rem; font-weight: 300; line-height: 1.8; color: var(--text-2); }
     .acc-toggle {
       display: flex; align-items: center; gap: .5rem;
       margin: .9rem 0 0; background: none; border: none; cursor: pointer;
       font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 500;
-      color: var(--sage); padding: 0; transition: color .2s;
+      color: var(--blue); padding: 0; transition: color .2s;
     }
-    .acc-toggle:hover { color: var(--sage-light); }
+    .acc-toggle:hover { color: var(--blue-mid); }
     .acc-toggle-icon {
       width: 20px; height: 20px; border-radius: 50%;
-      background: var(--sage-pale); display: flex; align-items: center; justify-content: center;
-      transition: transform .3s var(--ease), background .2s;
-      flex-shrink: 0;
+      background: var(--blue-pale); display: flex; align-items: center; justify-content: center;
+      transition: transform .3s var(--ease), background .2s; flex-shrink: 0;
     }
-    .acc-toggle-icon svg { width: 10px; height: 10px; stroke: var(--sage); transition: stroke .2s; }
-    .acc-item.open .acc-toggle-icon { transform: rotate(180deg); background: var(--sage); }
+    .acc-toggle-icon svg { width: 10px; height: 10px; stroke: var(--blue); transition: stroke .2s; }
+    .acc-item.open .acc-toggle-icon { transform: rotate(180deg); background: var(--blue); }
     .acc-item.open .acc-toggle-icon svg { stroke: white; }
     .acc-item.open .acc-toggle { color: var(--text-3); }
-
-    /* Corps caché */
-    .acc-body {
-      display: grid; grid-template-rows: 0fr;
-      transition: grid-template-rows .38s var(--ease);
-    }
+    .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .38s var(--ease); }
     .acc-item.open .acc-body { grid-template-rows: 1fr; }
-    .acc-body-inner {
-      overflow: hidden;
-    }
-    .acc-body-content {
-      padding: 0 1.5rem 1.5rem;
-      border-top: 1px solid var(--border);
-    }
+    .acc-body-inner { overflow: hidden; }
+    .acc-body-content { padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--border); }
     .acc-deroulé {
-      font-size: .82rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--text-3); margin: 1.2rem 0 .7rem;
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue); margin: 1.2rem 0 .6rem;
     }
-    .acc-detail {
-      font-size: .9rem; font-weight: 300; line-height: 1.82; color: var(--text-2); margin-bottom: 1.2rem;
-    }
+    .acc-detail { font-size: .9rem; font-weight: 300; line-height: 1.82; color: var(--text-2); margin-bottom: 1rem; }
     .acc-themes-title {
-      font-size: .78rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+      font-size: .75rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
       color: var(--text-3); margin-bottom: .6rem;
     }
     .acc-tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.4rem; }
@@ -299,12 +293,12 @@
     }
     .acc-rdv {
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--text-1); color: var(--white);
+      background: var(--blue-dark); color: var(--white);
       padding: .6rem 1.2rem; border-radius: 50px;
       font-size: .78rem; font-weight: 500;
       transition: background .2s, transform .15s;
     }
-    .acc-rdv:hover { background: var(--sage); transform: translateY(-1px); }
+    .acc-rdv:hover { background: var(--blue); transform: translateY(-1px); }
     .acc-rdv svg { width: 12px; height: 12px; }
 
     /* ── FAQ ── */
@@ -316,7 +310,7 @@
       padding: 1.25rem 0; cursor: pointer; user-select: none; gap: 1rem;
     }
     .faq-q span { font-size: .95rem; font-weight: 400; color: var(--text-1); transition: color .2s; line-height: 1.5; }
-    .faq-q:hover span { color: var(--sage); }
+    .faq-q:hover span { color: var(--blue); }
     .faq-icon {
       width: 24px; height: 24px; flex-shrink: 0;
       border: 1.5px solid var(--border-m); border-radius: 50%;
@@ -324,7 +318,7 @@
       transition: transform .3s var(--ease), background .2s, border-color .2s;
     }
     .faq-icon svg { width: 10px; height: 10px; stroke: var(--text-2); transition: stroke .2s; }
-    .faq-item.open .faq-icon { background: var(--text-1); border-color: var(--text-1); transform: rotate(45deg); }
+    .faq-item.open .faq-icon { background: var(--blue-dark); border-color: var(--blue-dark); transform: rotate(45deg); }
     .faq-item.open .faq-icon svg { stroke: white; }
     .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s var(--ease); }
     .faq-item.open .faq-a { grid-template-rows: 1fr; }
@@ -332,20 +326,74 @@
     .faq-item.open .faq-a-inner { padding-bottom: 1.2rem; }
     .faq-a-inner p { font-size: .9rem; font-weight: 300; line-height: 1.82; color: var(--text-2); }
 
+    /* ── BOÎTE À OUTILS ── */
+    #outils { background: var(--bg-alt); }
+    .outils-intro {
+      font-size: .95rem; font-weight: 300; line-height: 1.8; color: var(--text-2);
+      max-width: 680px; margin-bottom: 2.5rem;
+    }
+
+    .outil-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-md); overflow: hidden;
+      margin-bottom: .75rem;
+      transition: box-shadow .25s var(--ease);
+    }
+    .outil-item:hover { box-shadow: 0 4px 20px rgba(45,107,164,.08); }
+    .outil-item.open { box-shadow: 0 8px 32px rgba(45,107,164,.12); border-color: rgba(45,107,164,.2); }
+
+    .outil-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 1.5rem; cursor: pointer; user-select: none; gap: 1rem;
+    }
+    .outil-head-left { display: flex; align-items: center; gap: 1rem; }
+    .outil-num {
+      width: 32px; height: 32px; flex-shrink: 0;
+      background: var(--blue-pale); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 600; color: var(--blue);
+    }
+    .outil-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 400; color: var(--text-1); line-height: 1.3;
+    }
+    .outil-chevron {
+      width: 26px; height: 26px; flex-shrink: 0;
+      border: 1.5px solid var(--border-m); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .3s var(--ease), background .2s, border-color .2s;
+    }
+    .outil-chevron svg { width: 10px; height: 10px; stroke: var(--text-3); transition: stroke .2s; }
+    .outil-item.open .outil-chevron { transform: rotate(180deg); background: var(--blue-dark); border-color: var(--blue-dark); }
+    .outil-item.open .outil-chevron svg { stroke: white; }
+
+    .outil-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s var(--ease); }
+    .outil-item.open .outil-body { grid-template-rows: 1fr; }
+    .outil-body-inner { overflow: hidden; }
+    .outil-body-content {
+      padding: 1.2rem 1.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .outil-body-content p {
+      font-size: .9rem; font-weight: 300; line-height: 1.85; color: var(--text-2);
+      margin-bottom: .85rem;
+    }
+    .outil-body-content p:last-child { margin-bottom: 0; }
+
     /* ── À PROPOS ── */
-    #apropos { background: var(--bg-alt); }
+    #apropos { background: var(--bg); }
     .apropos-layout { display: grid; grid-template-columns: 400px 1fr; gap: 6rem; align-items: start; }
     .apropos-photo-wrap { position: relative; }
     .apropos-photo-wrap::before {
       content: ''; position: absolute;
       top: -16px; left: -16px; right: 16px; bottom: 16px;
-      border: 1.5px solid rgba(92,122,82,.25); border-radius: calc(var(--r-xl) + 4px); z-index: 0;
+      border: 1.5px solid rgba(45,107,164,.2); border-radius: calc(var(--r-xl) + 4px); z-index: 0;
     }
     .apropos-photo-wrap img { position: relative; z-index: 1; width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: var(--r-xl); display: block; }
     .apropos-text blockquote {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-style: italic; font-weight: 400; line-height: 1.4;
-      color: var(--sage); margin-bottom: 1.8rem; padding-left: 1.4rem; border-left: 2px solid var(--sage-light);
+      color: var(--blue); margin-bottom: 1.8rem; padding-left: 1.4rem; border-left: 2px solid var(--blue-light);
     }
     .apropos-text p { font-size: .93rem; font-weight: 300; line-height: 1.88; color: var(--text-2); margin-bottom: .9rem; }
     .apropos-text p strong { font-weight: 500; color: var(--text-1); }
@@ -357,28 +405,28 @@
     }
     .formations li::before {
       content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-      width: 5px; height: 5px; border-radius: 50%; background: var(--sage-light);
+      width: 5px; height: 5px; border-radius: 50%; background: var(--blue-light);
     }
 
     /* ── CONTACT ── */
-    #contact { background: var(--bg); }
+    #contact { background: var(--bg-alt); }
     .contact-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 5rem; align-items: start; }
     .contact-details { margin-top: 2rem; }
     .contact-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.4rem; }
     .contact-icon {
       width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%;
-      background: var(--bg-alt); border: 1px solid var(--border);
+      background: var(--blue-pale); border: 1px solid rgba(45,107,164,.15);
       display: flex; align-items: center; justify-content: center; font-size: .95rem;
     }
     .contact-item-body { font-size: .88rem; line-height: 1.7; color: var(--text-2); }
     .contact-item-body strong { display: block; font-weight: 500; color: var(--text-1); margin-bottom: .1rem; }
     .contact-item-body a { color: var(--text-2); transition: color .2s; }
-    .contact-item-body a:hover { color: var(--sage); }
+    .contact-item-body a:hover { color: var(--blue); }
     .contact-photo { margin-top: 2rem; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-lg); display: block; }
     .tally-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--r-xl); overflow: hidden; padding: 2.5rem;
-      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      box-shadow: 0 4px 24px rgba(45,107,164,.06);
     }
     .tally-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 400; color: var(--text-1); margin-bottom: 1.5rem; }
     .tally-card iframe { width: 100%; min-height: 560px; border: none; display: block; }
@@ -423,7 +471,7 @@
       .nav-ham { display: flex; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; text-align: center; }
-      .soins-banner { height: 160px; }
+      .soins-banner { height: 180px; }
       .tally-card { padding: 1.5rem; }
       .acc-footer { flex-direction: column; align-items: flex-start; gap: .8rem; }
     }
@@ -441,8 +489,9 @@
     <a href="#" class="nav-logo">L'Équilibre en Je</a>
     <ul class="nav-links">
       <li><a href="#soins">Soins</a></li>
-      <li><a href="#apropos">Qui je suis</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><a href="#outils">Boîte à outils</a></li>
+      <li><a href="#apropos">Qui je suis</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet"
@@ -454,8 +503,9 @@
 </nav>
 <div class="mob-menu" id="mobMenu">
   <a href="#soins">Soins</a>
-  <a href="#apropos">Qui je suis</a>
   <a href="#faq">FAQ</a>
+  <a href="#outils">Boîte à outils</a>
+  <a href="#apropos">Qui je suis</a>
   <a href="#contact">Contact</a>
   <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet"
      target="_blank" rel="noopener" class="mob-cta">Prendre rendez-vous</a>
@@ -481,9 +531,9 @@
   </div>
   <div class="hero-visual">
     <div class="hero-grid">
-      <figure><img src="plage.jpeg" alt="Plage" loading="eager"/></figure>
+      <figure><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=900&q=85&auto=format" alt="Forêt apaisante" loading="eager"/></figure>
       <figure><img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=85&auto=format" alt="Méditation" loading="eager"/></figure>
-      <figure><img src="livre.jpg" alt="Livre" loading="eager"/></figure>
+      <figure><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&q=85&auto=format" alt="Soin bien-être" loading="eager"/></figure>
     </div>
   </div>
 </section>
@@ -502,173 +552,122 @@
       <button class="stab" data-tab="adultes">Adultes</button>
     </div>
 
-    <!-- ── ENFANTS ── -->
+    <!-- ENFANTS -->
     <div class="spanel on" id="spanel-enfants">
+      <!-- Photo adaptée au format portrait/paysage, enfants -->
       <div class="soins-banner reveal">
-        <img src="balance.jpg" alt="Enfants et adolescents"/>
+        <img src="https://images.unsplash.com/photo-1560785496-3c9d27877182?w=1400&q=85&auto=format&fit=crop&crop=center" alt="Enfants et adolescents"/>
       </div>
       <div class="acc-list">
 
-        <!-- Profil d'apprentissage -->
         <div class="acc-item reveal">
           <div class="acc-always">
             <div class="acc-top">
               <div class="acc-title">Connaître son profil d'apprentissage</div>
               <div class="acc-price-badge">60€ · 1h00</div>
             </div>
-            <p class="acc-intro">Découvrez votre profil d'apprentissage grâce à la kinésiologie éducative. Identifiez vos stratégies, améliorez mémorisation, concentration et organisation, et repartez avec des clés concrètes pour apprendre à votre rythme.</p>
-            <button class="acc-toggle" aria-label="Voir plus">
-              <div class="acc-toggle-icon">
-                <svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg>
-              </div>
-              <span class="acc-toggle-label">En savoir plus</span>
-            </button>
+            <p class="acc-intro">Découvrez votre profil grâce à la <a class="tech-link" href="#outils" onclick="openOutil('kine-edu')">kinésiologie éducative</a>. Identifiez vos stratégies, améliorez mémorisation, concentration et organisation, et repartez avec des clés concrètes pour apprendre à votre rythme.</p>
+            <button class="acc-toggle"><div class="acc-toggle-icon"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div><span class="acc-toggle-label">En savoir plus</span></button>
           </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <div class="acc-body-content">
-                <p class="acc-detail">Vous avez certainement remarqué que chacun développe des stratégies d'apprentissage qui lui sont propres, dès le plus jeune âge. Certains tirent profit d'un enseignement visuel, d'autres ont besoin de toucher ou de pratiquer, et d'autres encore requièrent des explications verbales précises.<br><br>De la même manière que vous écrivez de la main droite ou gauche, vous lisez, écoutez, marchez, pensez et agissez en donnant une priorité à un côté. Cet accompagnement permet de mieux comprendre comment vous apprenez, d'améliorer mémorisation, concentration et confiance en soi.</p>
-                <p class="acc-themes-title">Pour quelle thématique ?</p>
-                <div class="acc-tags">
-                  <span class="acc-tag">J'apprends par cœur mais ça ne fonctionne pas</span>
-                  <span class="acc-tag">Je ne sais pas comment m'organiser</span>
-                  <span class="acc-tag">Je ne mémorise pas ce que j'apprends</span>
-                </div>
-                <div class="acc-footer">
-                  <div class="acc-full-price">60€ <span>— 1h00</span></div>
-                  <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet"
-                     target="_blank" rel="noopener" class="acc-rdv">
-                    Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-                  </a>
-                </div>
-              </div>
+          <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+            <p class="acc-detail">Vous avez certainement remarqué que chacun développe des stratégies d'apprentissage qui lui sont propres, dès le plus jeune âge. Certains tirent profit d'un enseignement visuel, d'autres ont besoin de toucher ou de pratiquer, et d'autres encore requièrent des explications verbales précises.<br><br>De la même manière que vous écrivez de la main droite ou gauche, vous lisez, écoutez, marchez, pensez et agissez en donnant une priorité à un côté. Cet accompagnement permet de mieux comprendre comment vous apprenez, d'améliorer mémorisation, concentration et confiance en soi.</p>
+            <p class="acc-themes-title">Pour quelle thématique ?</p>
+            <div class="acc-tags">
+              <span class="acc-tag">J'apprends par cœur mais ça ne fonctionne pas</span>
+              <span class="acc-tag">Je ne sais pas comment m'organiser</span>
+              <span class="acc-tag">Je ne mémorise pas ce que j'apprends</span>
             </div>
-          </div>
+            <div class="acc-footer">
+              <div class="acc-full-price">60€ <span>— 1h00</span></div>
+              <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet" target="_blank" rel="noopener" class="acc-rdv">Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
+            </div>
+          </div></div></div>
         </div>
 
-        <!-- Orientation pro -->
         <div class="acc-item reveal" style="transition-delay:.07s">
           <div class="acc-always">
             <div class="acc-top">
               <div class="acc-title">Aide à l'orientation professionnelle</div>
               <div class="acc-price-badge">120€ · 1h45</div>
             </div>
-            <p class="acc-intro">Le soin d'orientation professionnelle a pour objectif d'aider l'adolescent à mieux se connaître afin de faire émerger des pistes d'orientation adaptées à sa personnalité et à ses capacités.</p>
-            <button class="acc-toggle" aria-label="Voir plus">
-              <div class="acc-toggle-icon">
-                <svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg>
-              </div>
-              <span class="acc-toggle-label">En savoir plus</span>
-            </button>
+            <p class="acc-intro">Le soin d'orientation professionnelle aide l'adolescent à mieux se connaître afin de faire émerger des pistes adaptées à sa personnalité et à ses capacités.</p>
+            <button class="acc-toggle"><div class="acc-toggle-icon"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div><span class="acc-toggle-label">En savoir plus</span></button>
           </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <div class="acc-body-content">
-                <p class="acc-detail">Grâce à une approche globale, ce soin permet de mettre en lumière les domaines d'activité et les environnements professionnels qui lui correspondent le mieux, tout en tenant compte de ses éventuels freins émotionnels.<br><br>Il ne s'agit pas d'un choix définitif, mais d'un éclairage bienveillant qui aide l'adolescent à avancer avec plus de confiance, de clarté et de sérénité dans son parcours scolaire et professionnel.</p>
-                <p class="acc-deroulé">Déroulé de la séance</p>
-                <p class="acc-detail">La séance débute par l'élaboration d'un profil d'apprentissage, afin de mieux comprendre sa manière de fonctionner, de mémoriser et de se motiver.<br><br>Nous explorons et levons ensuite la présence éventuelle de blocages émotionnels pouvant freiner ses choix ou sa confiance grâce à la kinésiologie.<br><br>À l'aide de l'antenne de Lecher (biorésonnance), nous évaluons les domaines d'activité et les métiers qui résonnent le plus positivement pour lui.<br><br>À l'issue du rendez-vous, un compte rendu est envoyé par e-mail.</p>
-                <div class="acc-footer">
-                  <div class="acc-full-price">120€ <span>— 1h45</span></div>
-                  <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet"
-                     target="_blank" rel="noopener" class="acc-rdv">
-                    Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-                  </a>
-                </div>
-              </div>
+          <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+            <p class="acc-detail">Grâce à une approche globale, ce soin permet de mettre en lumière les domaines d'activité et les environnements professionnels qui lui correspondent le mieux, tout en tenant compte de ses éventuels freins émotionnels.</p>
+            <p class="acc-deroulé">Déroulé de la séance</p>
+            <p class="acc-detail">La séance débute par l'élaboration d'un profil d'apprentissage via la <a class="tech-link" href="#outils" onclick="openOutil('kine-edu')">kinésiologie éducative</a>.<br><br>Nous explorons et levons les blocages émotionnels grâce à la <a class="tech-link" href="#outils" onclick="openOutil('kpe')">kinésiologie</a>.<br><br>À l'aide de l'antenne de Lecher (biorésonnance), nous évaluons les domaines et métiers qui résonnent le plus positivement. Un compte rendu est envoyé par e-mail à l'issue du rendez-vous.</p>
+            <div class="acc-footer">
+              <div class="acc-full-price">120€ <span>— 1h45</span></div>
+              <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet" target="_blank" rel="noopener" class="acc-rdv">Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
             </div>
-          </div>
+          </div></div></div>
         </div>
 
-        <!-- Troubles apprentissage -->
         <div class="acc-item reveal" style="transition-delay:.14s">
           <div class="acc-always">
             <div class="acc-top">
               <div class="acc-title">Troubles des apprentissages scolaires</div>
               <div class="acc-price-badge">70€ · 1h30</div>
             </div>
-            <p class="acc-intro">Les difficultés scolaires ne sont jamais le fruit du hasard. Derrière un manque de concentration, des problèmes de lecture, d'écriture, de compréhension ou de mémorisation, il existe souvent des déséquilibres plus profonds, qu'ils soient émotionnels, corporels ou neurologiques.</p>
-            <button class="acc-toggle" aria-label="Voir plus">
-              <div class="acc-toggle-icon">
-                <svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg>
-              </div>
-              <span class="acc-toggle-label">En savoir plus</span>
-            </button>
+            <p class="acc-intro">Les difficultés scolaires ne sont jamais le fruit du hasard. Derrière un manque de concentration, des problèmes de lecture, d'écriture ou de mémorisation, il existe souvent des déséquilibres plus profonds.</p>
+            <button class="acc-toggle"><div class="acc-toggle-icon"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div><span class="acc-toggle-label">En savoir plus</span></button>
           </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <div class="acc-body-content">
-                <p class="acc-detail">Grâce à une approche globale personnalisée et bienveillante, basée sur des techniques telles que la kinésiologie éducative, les réflexes archaïques et la Brain Therapy, j'identifie et lève les blocages à la source.<br><br>Chaque enfant est unique. C'est pourquoi j'adapte mes séances en fonction de son âge, de ses besoins et de son rythme. Mon accompagnement vise à soutenir l'enfant dans sa globalité — corps, émotions et cognition — afin qu'il puisse développer ses compétences scolaires avec sérénité.<br><br>L'objectif n'est pas seulement d'améliorer les résultats scolaires, mais surtout de redonner confiance, motivation et plaisir d'apprendre.</p>
-                <p class="acc-deroulé">Déroulé d'une séance</p>
-                <p class="acc-detail">Suite à un échange sur les raisons de la consultation, j'établis avec l'enfant un objectif de séance afin de l'impliquer dans l'approche. Dans un premier temps, j'établis son profil préférentiel d'apprentissage afin de mettre en lumière la manière avec laquelle il entend, voit et perçoit les choses et comment il réagit sous stress.<br><br>Puis j'utilise une ou plusieurs techniques de ma boîte à outils afin d'apporter un équilibre dans les sphères où le corps a montré du stress. Je l'encourage à échanger sur ses ressentis et perceptions, et peux proposer un mouvement à pratiquer à la maison pour ancrer le travail.<br><br>Nous nous revoyons un mois après afin de voir l'évolution. 1 à 2 séances complémentaires espacées de 4 semaines peuvent être utiles pour consolider le travail.</p>
-                <p class="acc-themes-title">Pour quelle thématique ?</p>
-                <div class="acc-tags">
-                  <span class="acc-tag">J'apprends mais je n'ai pas de résultats</span>
-                  <span class="acc-tag">Je n'ai pas confiance en moi</span>
-                  <span class="acc-tag">Je n'arrive pas à me concentrer</span>
-                  <span class="acc-tag">J'ai peur d'aller à l'école</span>
-                  <span class="acc-tag">Je n'arrive pas à organiser mes idées</span>
-                </div>
-                <div class="acc-footer">
-                  <div class="acc-full-price">70€ <span>— 1h30</span></div>
-                  <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet"
-                     target="_blank" rel="noopener" class="acc-rdv">
-                    Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-                  </a>
-                </div>
-              </div>
+          <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+            <p class="acc-detail">Grâce à une approche globale personnalisée basée sur la <a class="tech-link" href="#outils" onclick="openOutil('kine-edu')">kinésiologie éducative</a>, les <a class="tech-link" href="#outils" onclick="openOutil('reflexes')">réflexes archaïques</a> et la <a class="tech-link" href="#outils" onclick="openOutil('brain-therapy')">Brain Therapy</a>, j'identifie et lève les blocages à la source.</p>
+            <p class="acc-deroulé">Déroulé d'une séance</p>
+            <p class="acc-detail">Suite à un échange sur les raisons de la consultation, j'établis avec l'enfant un objectif de séance. Dans un premier temps, j'établis son profil préférentiel d'apprentissage afin de mettre en lumière la manière avec laquelle il entend, voit et perçoit les choses.<br><br>J'utilise ensuite une ou plusieurs techniques pour apporter un équilibre. Je l'encourage à échanger sur ses ressentis et peux proposer un mouvement à pratiquer à la maison. Nous nous revoyons un mois après pour voir l'évolution. 1 à 2 séances complémentaires peuvent être utiles.</p>
+            <p class="acc-themes-title">Pour quelle thématique ?</p>
+            <div class="acc-tags">
+              <span class="acc-tag">J'apprends mais je n'ai pas de résultats</span>
+              <span class="acc-tag">Je n'ai pas confiance en moi</span>
+              <span class="acc-tag">Je n'arrive pas à me concentrer</span>
+              <span class="acc-tag">J'ai peur d'aller à l'école</span>
+              <span class="acc-tag">Je n'arrive pas à organiser mes idées</span>
             </div>
-          </div>
+            <div class="acc-footer">
+              <div class="acc-full-price">70€ <span>— 1h30</span></div>
+              <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet" target="_blank" rel="noopener" class="acc-rdv">Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
+            </div>
+          </div></div></div>
         </div>
 
-        <!-- Gestion émotions -->
         <div class="acc-item reveal" style="transition-delay:.21s">
           <div class="acc-always">
             <div class="acc-top">
               <div class="acc-title">Gestion des émotions</div>
               <div class="acc-price-badge">60€ · 1h00</div>
             </div>
-            <p class="acc-intro">Je vous propose un rendez-vous centré sur la gestion des émotions, afin de mieux comprendre ce que votre enfant/adolescent ressent et qu'il retrouve un apaisement durable.</p>
-            <button class="acc-toggle" aria-label="Voir plus">
-              <div class="acc-toggle-icon">
-                <svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg>
-              </div>
-              <span class="acc-toggle-label">En savoir plus</span>
-            </button>
+            <p class="acc-intro">Un rendez-vous centré sur la gestion des émotions, afin de mieux comprendre ce que votre enfant/adolescent ressent et qu'il retrouve un apaisement durable.</p>
+            <button class="acc-toggle"><div class="acc-toggle-icon"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div><span class="acc-toggle-label">En savoir plus</span></button>
           </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <div class="acc-body-content">
-                <p class="acc-detail">Grâce à des techniques douces et efficaces comme la kinésiologie, l'EFT, les Réflexes archaïques et la Brain Therapy, nous travaillons ensemble sur les blocages émotionnels, le stress ou les tensions du quotidien.<br><br>Moment d'échange avec le corps, de partage des mots/maux mis en lumière, vous repartez avec des outils simples à utiliser au quotidien, pour continuer le travail en toute autonomie et renforcer l'équilibre émotionnel jour après jour.</p>
-                <p class="acc-themes-title">Pour quelle thématique ?</p>
-                <div class="acc-tags">
-                  <span class="acc-tag">Je n'arrive pas à faire baisser mes émotions</span>
-                  <span class="acc-tag">Je fais pipi au lit</span>
-                  <span class="acc-tag">Je manque de confiance en moi</span>
-                  <span class="acc-tag">J'ai des crises d'angoisses</span>
-                </div>
-                <div class="acc-footer">
-                  <div class="acc-full-price">60€ <span>— 1h00</span></div>
-                  <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet"
-                     target="_blank" rel="noopener" class="acc-rdv">
-                    Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-                  </a>
-                </div>
-              </div>
+          <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+            <p class="acc-detail">Grâce à des techniques douces et efficaces comme la <a class="tech-link" href="#outils" onclick="openOutil('kine-edu')">kinésiologie</a>, l'<a class="tech-link" href="#outils" onclick="openOutil('eft')">EFT</a>, les <a class="tech-link" href="#outils" onclick="openOutil('reflexes')">réflexes archaïques</a> et la <a class="tech-link" href="#outils" onclick="openOutil('brain-therapy')">Brain Therapy</a>, nous travaillons ensemble sur les blocages émotionnels, le stress ou les tensions du quotidien.<br><br>Vous repartez avec des outils simples à utiliser au quotidien pour continuer le travail en toute autonomie.</p>
+            <p class="acc-themes-title">Pour quelle thématique ?</p>
+            <div class="acc-tags">
+              <span class="acc-tag">Je n'arrive pas à faire baisser mes émotions</span>
+              <span class="acc-tag">Je fais pipi au lit</span>
+              <span class="acc-tag">Je manque de confiance en moi</span>
+              <span class="acc-tag">J'ai des crises d'angoisses</span>
             </div>
-          </div>
+            <div class="acc-footer">
+              <div class="acc-full-price">60€ <span>— 1h00</span></div>
+              <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet" target="_blank" rel="noopener" class="acc-rdv">Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
+            </div>
+          </div></div></div>
         </div>
 
       </div>
     </div>
 
-    <!-- ── ADULTES ── -->
+    <!-- ADULTES -->
     <div class="spanel" id="spanel-adultes">
+      <!-- Photo méditation similaire -->
       <div class="soins-banner reveal">
-        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80&auto=format" alt="Soins adultes"/>
+        <img src="https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=1400&q=85&auto=format&fit=crop&crop=center" alt="Méditation adultes"/>
       </div>
       <div class="acc-list">
 
-        <!-- Équilibrage énergétique -->
         <div class="acc-item reveal">
           <div class="acc-always">
             <div class="acc-top">
@@ -676,37 +675,24 @@
               <div class="acc-price-badge">70€ · 1h15</div>
             </div>
             <p class="acc-intro">Un accompagnement holistique qui harmonise corps et esprit, libère les blocages et apaise les tensions pour un mieux-être profond, grâce au magnétisme et à l'acupression.</p>
-            <button class="acc-toggle" aria-label="Voir plus">
-              <div class="acc-toggle-icon">
-                <svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg>
-              </div>
-              <span class="acc-toggle-label">En savoir plus</span>
-            </button>
+            <button class="acc-toggle"><div class="acc-toggle-icon"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div><span class="acc-toggle-label">En savoir plus</span></button>
           </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <div class="acc-body-content">
-                <p class="acc-detail">La guidance, transmise à travers des perceptions intuitives et des messages subtils, offre des clés de compréhension sur votre situation actuelle, vos questionnements ou vos choix de vie. Ce soin vous aide à y voir plus clair, à vous reconnecter à votre intuition et à avancer avec davantage de confiance, d'alignement et de sérénité.</p>
-                <p class="acc-themes-title">Pour quelle thématique ?</p>
-                <div class="acc-tags">
-                  <span class="acc-tag">Je suis fatigué(e)</span>
-                  <span class="acc-tag">Je me sens décalé(e)</span>
-                  <span class="acc-tag">J'ai des douleurs inexpliquées</span>
-                  <span class="acc-tag">J'ai besoin d'un éclairage sur ma vie</span>
-                </div>
-                <div class="acc-footer">
-                  <div class="acc-full-price">70€ <span>— 1h15</span></div>
-                  <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet"
-                     target="_blank" rel="noopener" class="acc-rdv">
-                    Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-                  </a>
-                </div>
-              </div>
+          <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+            <p class="acc-detail">La guidance, transmise à travers des perceptions intuitives et des messages subtils, offre des clés de compréhension sur votre situation actuelle, vos questionnements ou vos choix de vie. Ce soin vous aide à y voir plus clair, à vous reconnecter à votre intuition et à avancer avec davantage de confiance, d'alignement et de sérénité.</p>
+            <p class="acc-themes-title">Pour quelle thématique ?</p>
+            <div class="acc-tags">
+              <span class="acc-tag">Je suis fatigué(e)</span>
+              <span class="acc-tag">Je me sens décalé(e)</span>
+              <span class="acc-tag">J'ai des douleurs inexpliquées</span>
+              <span class="acc-tag">J'ai besoin d'un éclairage sur ma vie</span>
             </div>
-          </div>
+            <div class="acc-footer">
+              <div class="acc-full-price">70€ <span>— 1h15</span></div>
+              <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet" target="_blank" rel="noopener" class="acc-rdv">Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
+            </div>
+          </div></div></div>
         </div>
 
-        <!-- Soin psycho-énergétique -->
         <div class="acc-item reveal" style="transition-delay:.07s">
           <div class="acc-always">
             <div class="acc-top">
@@ -714,27 +700,15 @@
               <div class="acc-price-badge">70€ · 1h15</div>
             </div>
             <p class="acc-intro">Le soin psycho-énergétique s'adresse à toute personne venant avec une problématique, un mal-être général, ou une situation de vie répétitive.</p>
-            <button class="acc-toggle" aria-label="Voir plus">
-              <div class="acc-toggle-icon">
-                <svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg>
-              </div>
-              <span class="acc-toggle-label">En savoir plus</span>
-            </button>
+            <button class="acc-toggle"><div class="acc-toggle-icon"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div><span class="acc-toggle-label">En savoir plus</span></button>
           </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <div class="acc-body-content">
-                <p class="acc-detail">J'utilise les techniques adaptées telles que la kinésiologie, l'EFT, la Brain Therapy ou le magnétisme afin d'identifier et de libérer les blocages d'ordre émotionnel, mental, énergétique, voire transgénérationnel qui empêchent la personne d'avancer.<br><br>Le corps mémorise tout : expériences vécues, émotions non exprimées, schémas inconscients. Ce soin permet d'accéder à ces mémoires, de les comprendre et de les transformer en douceur, afin de retrouver équilibre, clarté, vitalité et un mieux-être durable.<br><br>Une 2e séance est souvent nécessaire, chacun allant à son rythme.</p>
-                <div class="acc-footer">
-                  <div class="acc-full-price">70€ <span>— 1h15</span></div>
-                  <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet"
-                     target="_blank" rel="noopener" class="acc-rdv">
-                    Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-                  </a>
-                </div>
-              </div>
+          <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+            <p class="acc-detail">J'utilise les techniques adaptées telles que la <a class="tech-link" href="#outils" onclick="openOutil('kpe')">kinésiologie psycho-énergétique</a>, l'<a class="tech-link" href="#outils" onclick="openOutil('eft')">EFT</a>, la <a class="tech-link" href="#outils" onclick="openOutil('brain-therapy')">Brain Therapy</a> ou le magnétisme afin d'identifier et de libérer les blocages d'ordre émotionnel, mental, énergétique, voire transgénérationnel.<br><br>Le corps mémorise tout : expériences vécues, émotions non exprimées, schémas inconscients. Ce soin permet d'accéder à ces mémoires, de les comprendre et de les transformer en douceur, afin de retrouver équilibre, clarté, vitalité et un mieux-être durable.<br><br>Une 2e séance est souvent nécessaire, chacun allant à son rythme.</p>
+            <div class="acc-footer">
+              <div class="acc-full-price">70€ <span>— 1h15</span></div>
+              <a href="https://www.resalib.fr/praticien/108971-dominique-lembeye-l-equilibre-en-je-therapeute-psychocorporel-anglet" target="_blank" rel="noopener" class="acc-rdv">Réserver <svg fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="2"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
             </div>
-          </div>
+          </div></div></div>
         </div>
 
       </div>
@@ -757,7 +731,7 @@
       </div>
       <div class="faq-item reveal" style="transition-delay:.06s">
         <div class="faq-q"><span>Quels soins proposez-vous ?</span><div class="faq-icon"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M5 2v6M2 5h6"/></svg></div></div>
-        <div class="faq-a"><div class="faq-a-inner"><p>J'accompagne enfants, ados et adultes grâce à plusieurs approches : Brain Gym®, EFT (Techniques de Libération Émotionnelle), Reiki Kundalini, magnétisme, harmonisation psycho-énergétique (KPE) et Brain Thérapie.</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p>J'accompagne enfants, ados et adultes grâce à plusieurs approches : <a class="tech-link" href="#outils" onclick="openOutil('kine-edu')">Brain Gym®</a>, <a class="tech-link" href="#outils" onclick="openOutil('eft')">EFT</a>, magnétisme, <a class="tech-link" href="#outils" onclick="openOutil('kpe')">harmonisation psycho-énergétique</a>, <a class="tech-link" href="#outils" onclick="openOutil('reflexes')">réflexes archaïques</a> et <a class="tech-link" href="#outils" onclick="openOutil('brain-therapy')">Brain Thérapie</a>.</p></div></div>
       </div>
       <div class="faq-item reveal" style="transition-delay:.12s">
         <div class="faq-q"><span>Quelle est la durée d'une séance ?</span><div class="faq-icon"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M5 2v6M2 5h6"/></svg></div></div>
@@ -775,6 +749,96 @@
   </div>
 </section>
 
+<!-- BOÎTE À OUTILS -->
+<section id="outils" class="section">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <p class="label">Approches thérapeutiques</p>
+      <h2 class="h2">La boîte à outils</h2>
+      <p class="section-sub">Chaque technique est choisie en fonction de vos besoins. Découvrez les approches utilisées lors des séances.</p>
+    </div>
+
+    <div class="acc-list" id="outils-list">
+
+      <div class="outil-item reveal" data-outil="kine-edu">
+        <div class="outil-head">
+          <div class="outil-head-left">
+            <div class="outil-num">01</div>
+            <div class="outil-title">Kinésiologie Éducative — Brain Gym®</div>
+          </div>
+          <div class="outil-chevron"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div>
+        </div>
+        <div class="outil-body"><div class="outil-body-inner"><div class="outil-body-content">
+          <p>La kinésiologie éducative est une approche douce qui vise à rétablir l'équilibre entre le corps, les émotions et les capacités d'apprentissage. Elle s'appuie sur le mouvement, la conscience corporelle et l'écoute du stress pour lever les blocages qui freinent le développement personnel et scolaire.</p>
+          <p>Cette méthode permet d'améliorer la concentration, la mémorisation, la coordination et la gestion des émotions. Elle est particulièrement indiquée en cas de difficultés d'apprentissage, de manque de confiance en soi, de stress, de troubles de l'attention, de fatigue ou de tensions émotionnelles persistantes.</p>
+          <p>Recourir à la kinésiologie éducative, c'est choisir un accompagnement personnalisé qui respecte le rythme de chacun. En favorisant une meilleure connexion entre le corps et le cerveau, elle aide à retrouver clarté, fluidité et plaisir d'apprendre, à tout âge, dans un cadre bienveillant et sécurisant.</p>
+        </div></div></div>
+      </div>
+
+      <div class="outil-item reveal" style="transition-delay:.07s" data-outil="kpe">
+        <div class="outil-head">
+          <div class="outil-head-left">
+            <div class="outil-num">02</div>
+            <div class="outil-title">Kinésiologie Psycho-Énergétique — KPE</div>
+          </div>
+          <div class="outil-chevron"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div>
+        </div>
+        <div class="outil-body"><div class="outil-body-inner"><div class="outil-body-content">
+          <p>La kinésiologie psycho-énergétique est une approche globale qui vise à rétablir l'équilibre entre le corps, les émotions, le mental et l'énergie. Elle s'appuie sur l'écoute du corps pour identifier les stress conscients ou inconscients à l'origine de blocages émotionnels, relationnels ou comportementaux.</p>
+          <p>Cette méthode aide à libérer les mémoires de stress, à apaiser les tensions intérieures et à retrouver un meilleur alignement personnel. Elle peut être bénéfique en cas d'anxiété, de fatigue émotionnelle, de schémas répétitifs, de difficultés relationnelles ou de périodes de transition de vie.</p>
+          <p>Recourir à la kinésiologie psycho-énergétique, c'est s'offrir un accompagnement doux et personnalisé, favorisant une meilleure compréhension de soi et un retour à l'équilibre, dans le respect du rythme et des besoins de chacun.</p>
+        </div></div></div>
+      </div>
+
+      <div class="outil-item reveal" style="transition-delay:.14s" data-outil="eft">
+        <div class="outil-head">
+          <div class="outil-head-left">
+            <div class="outil-num">03</div>
+            <div class="outil-title">EFT — Emotional Freedom Techniques</div>
+          </div>
+          <div class="outil-chevron"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div>
+        </div>
+        <div class="outil-body"><div class="outil-body-inner"><div class="outil-body-content">
+          <p>L'EFT (Emotional Freedom Techniques) est une méthode de libération émotionnelle qui associe la stimulation de points précis du corps par de légers tapotements et la verbalisation des ressentis. Elle permet d'agir à la fois sur les émotions, le mental et le corps, en aidant à apaiser le stress et les réactions émotionnelles excessives.</p>
+          <p>Cette approche est particulièrement indiquée pour gérer l'anxiété, les peurs, les blocages émotionnels, les souvenirs difficiles ou le manque de confiance en soi. En rééquilibrant le système émotionnel, l'EFT favorise un apaisement rapide et durable.</p>
+          <p>Recourir à l'EFT, c'est choisir une technique douce, accessible et respectueuse de chacun, qui permet de retrouver plus de sérénité, de clarté intérieure et de liberté émotionnelle dans la vie quotidienne.</p>
+        </div></div></div>
+      </div>
+
+      <div class="outil-item reveal" style="transition-delay:.21s" data-outil="reflexes">
+        <div class="outil-head">
+          <div class="outil-head-left">
+            <div class="outil-num">04</div>
+            <div class="outil-title">Réflexes Archaïques — RMTI</div>
+          </div>
+          <div class="outil-chevron"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div>
+        </div>
+        <div class="outil-body"><div class="outil-body-inner"><div class="outil-body-content">
+          <p>Les réflexes archaïques sont des mouvements automatiques présents dès la naissance, indispensables au bon développement du système nerveux. Lorsqu'ils ne sont pas correctement intégrés, ils peuvent perturber la posture, la coordination, l'attention, les apprentissages ou la régulation émotionnelle à tout âge.</p>
+          <p>La méthode RMTI – Rhythmic Movement Training International propose un accompagnement doux basé sur des mouvements rythmiques simples. Ceux-ci permettent de favoriser l'intégration des réflexes persistants et de soutenir une meilleure organisation neurologique.</p>
+          <p>Cette approche peut être bénéfique en cas de difficultés d'apprentissage, de troubles de l'attention, de stress, de fatigue, de manque de confiance en soi ou de tensions corporelles. Recourir au RMTI, c'est choisir une méthode respectueuse du rythme de chacun, favorisant plus de stabilité, de confort intérieur et de fluidité dans le quotidien.</p>
+        </div></div></div>
+      </div>
+
+      <div class="outil-item reveal" style="transition-delay:.28s" data-outil="brain-therapy">
+        <div class="outil-head">
+          <div class="outil-head-left">
+            <div class="outil-num">05</div>
+            <div class="outil-title">Brain Therapy®</div>
+          </div>
+          <div class="outil-chevron"><svg fill="none" viewBox="0 0 10 10" stroke-width="2"><path d="M2 4l3 3 3-3"/></svg></div>
+        </div>
+        <div class="outil-body"><div class="outil-body-inner"><div class="outil-body-content">
+          <p>La Brain Therapy® est une approche manuelle douce et précise développée par le docteur Bruno Chikly. Elle vise à soutenir l'équilibre du système nerveux et le bon fonctionnement du cerveau grâce à une écoute fine des micro-mouvements et des rythmes cérébraux.</p>
+          <p>Utilisée notamment pour la gestion du stress, cette technique aide à apaiser les surcharges émotionnelles et mentales, favorisant un profond relâchement et un meilleur équilibre intérieur. Elle est également un soutien précieux dans l'équilibrage des réflexes archaïques encore actifs.</p>
+          <p>La Brain Therapy® offre un accompagnement respectueux et non invasif, permettant au corps et au cerveau de retrouver une meilleure organisation. Elle favorise ainsi plus de stabilité, de clarté et de sérénité au quotidien, dans le respect du rythme de chacun.</p>
+        </div></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- À PROPOS -->
 <section id="apropos" class="section">
   <div class="section-inner">
@@ -782,6 +846,7 @@
       <div class="apropos-photo-wrap reveal">
         <img
           src="dominique.jpg"
+          onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85'"
           alt="Dominique Lembeye"/>
       </div>
       <div class="apropos-text reveal" style="transition-delay:.15s">
@@ -860,8 +925,9 @@
         <h4>Navigation</h4>
         <ul>
           <li><a href="#soins">Soins</a></li>
-          <li><a href="#apropos">Qui je suis</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="#outils">Boîte à outils</a></li>
+          <li><a href="#apropos">Qui je suis</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -910,7 +976,7 @@
     });
   });
 
-  // Accordéon soins — toggle individuel
+  // Accordéon soins
   document.querySelectorAll('.acc-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.acc-item');
@@ -920,7 +986,7 @@
     });
   });
 
-  // FAQ accordion
+  // FAQ
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
       const item = q.closest('.faq-item');
@@ -929,6 +995,31 @@
       if (!isOpen) item.classList.add('open');
     });
   });
+
+  // Boîte à outils accordéon
+  document.querySelectorAll('.outil-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const item = head.closest('.outil-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.outil-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Fonction pour ouvrir un outil depuis les liens tech-link
+  function openOutil(id) {
+    // Scroll vers la section
+    setTimeout(() => {
+      const target = document.querySelector(`[data-outil="${id}"]`);
+      if (!target) return;
+      // Fermer tous, ouvrir celui ciblé
+      document.querySelectorAll('.outil-item').forEach(i => i.classList.remove('open'));
+      target.classList.add('open');
+      // Scroll avec offset nav
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 350); // léger délai pour laisser le scroll de section se faire
+  }
 
   // Scroll reveal
   const obs = new IntersectionObserver(entries => {
